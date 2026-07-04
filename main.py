@@ -114,10 +114,12 @@ def update_patient(patient_id : str, patient_update: PatientUpdate):
         raise HTTPException(status_code=404, detail="Patient not found")
 
     existing_patient_info = data[patient_id]
+
     #convert the pydantic output (PatientUpdate) of the pydantic model into a dictionary 
     # as existing_paitent_info is also in dictionary
 
     updated_patient_info = patient_update.model_dump(exclude_unset=True)
+
     #Using exclude_unset=True allows you to extract only the fields the user provided, 
     # preventing you from accidentally overwriting existing database fields with default model values.
 
